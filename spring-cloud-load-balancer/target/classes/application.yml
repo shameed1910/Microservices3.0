@@ -1,0 +1,36 @@
+spring:
+  application.name: load-balancer
+server:
+  port: 7070
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 3
+      automaticTransitionFromOpenToHalfOpenEnabled: true
+      waitDurationInOpenState: 100s
+      failureRateThreshold: 50
+      minimumNumberOfCalls: 5
+      eventConsumerBufferSize: 10
+      slidingWindowType: COUNT_BASED
+
+management:
+  health:
+    defaults:
+      enabled: true
+    circuitbreakers:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
