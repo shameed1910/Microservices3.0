@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: zipkin-service
+server:
+  port: 7761
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
