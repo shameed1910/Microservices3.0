@@ -1,0 +1,24 @@
+spring:
+  cloud:
+    bus:
+      env:
+        enabled: true
+    config:
+      server:
+        git:
+          uri: https://github.com/shameed1910/config-repo
+  kafka:
+    bootstrap-servers: http://localhost:9092
+
+  application:
+    name: config-server
+server:
+  port: 8888
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
