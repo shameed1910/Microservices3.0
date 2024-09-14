@@ -1,0 +1,28 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/my-keycloak-application
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=/products/**
+
+
+server:
+  port: 9090
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
